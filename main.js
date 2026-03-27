@@ -66,7 +66,7 @@ const WELCOME_HTML = `<!DOCTYPE html>
     </p>
     <p>
       <!-- Add a custom description of your toolset here -->
-      Currently there only is the tool to configure different post-quantum TLS Handshakes,\n which I developed within my bachelor thesis!
+      Currently there only is a tool to configure different post-quantum instantiations of the TLS 1.3 Handshake,\n which I developed within my bachelor thesis!
     </p>
     <div class="pills">
       <span class="pill">Network</span>
