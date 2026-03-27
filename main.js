@@ -60,14 +60,13 @@ const WELCOME_HTML = `<!DOCTYPE html>
 <body>
   <div class="card">
     <div class="icon">⬡</div>
-    <h1>Welcome to D-Net Tools</h1>
+    <h1>Welcome!</h1>
     <p>
-      Your internal hub for network diagnostics, utilities, and monitoring.
-      Select a tool from the menu above to get started.
+      Various tools created by me will be hosted on this website.
     </p>
     <p>
       <!-- Add a custom description of your toolset here -->
-      All tools run locally in your browser. No data leaves this page.
+      Currently there only is the tool to configure different post-quantum TLS Handshakes,\n which I developed within my bachelor thesis!
     </p>
     <div class="pills">
       <span class="pill">Network</span>
