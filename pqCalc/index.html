@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PQ TLS Handshake Configurator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="layout-wrapper">
+        
+        <div class="selection-panel">
+            <h2>Handshake Setup</h2>
+            <!--
+            ########################
+            ##### Key Exchnage #####
+            ########################
+            -->
+
+            <div class="form-group">
+                <label for="keyExScheme1" id="keyEx1">Key Exchange</label>
+                <div class="custom-dropdown">
+                    <input type="text" id="keyExScheme1" placeholder="Select Scheme..." autocomplete="off">
+                    <div id="listKeyExScheme1" class="dropdown-options"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="keyExParams1">Parameterset</label>
+                <div class="custom-dropdown">
+                    <input type="text" id="keyExParams1" placeholder="Select scheme first.." disabled autocomplete="off">
+                    <div id="listKeyExParams1" class="dropdown-options"></div>
+                </div>
+            </div>
+
+            <div class="checkbox-group" style="margin-bottom: 1.2rem;">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkHybrid">
+                    <label for="checkHybrid">Use hybrid</label>
+                </div>
+            </div>
+
+            <!--##### Hybrid #####-->
+            <div id="hybrid-inputs" class="hidden">
+                <div class="form-group">
+                    <label for="keyExScheme2">Key Exchange 2</label>
+                    <div class="custom-dropdown">
+                        <input type="text" id="keyExScheme2" placeholder="Select Scheme..." autocomplete="off">
+                        <div id="listKeyExScheme2" class="dropdown-options"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="keyExParams2">Parameterset</label>
+                    <div class="custom-dropdown">
+                        <input type="text" id="keyExParams2" placeholder="Select scheme first.." disabled autocomplete="off">
+                        <div id="listKeyExParams2" class="dropdown-options"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            ########################
+            ###### Signature #######
+            ########################
+            -->
+
+            <hr>
+
+            <div class="form-group">
+                <label for="sigScheme">Signature Scheme</label>
+                <div class="custom-dropdown">
+                    <input type="text" id="sigScheme" placeholder="Select Scheme..." autocomplete="off">
+                    <div id="listSigSchemes" class="dropdown-options"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sigParams">Parameterset</label>
+                <div class="custom-dropdown">
+                    <input type="text" id="sigParams" placeholder="Select scheme first.." disabled autocomplete="off">
+                    <div id="listSigParams" class="dropdown-options"></div>
+                </div>
+            </div>
+
+            <!--
+            ########################
+            ###### Extensions ######
+            ########################
+            -->    
+
+            <hr>
+            <!--##### OCSP-Stapling #####-->
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkOCSP">
+                    <label for="checkOCSP">OCSP stapling </label>
+                    <span class="tooltip-container">
+                        <span class="help-icon">?</span>
+                        <div class="tooltip-box">
+                            <p>Checking this box enables OCSP-stapling, adding an OCSP-response to the server message.</p>
+                            <p>By default ECDSA with secp256r1 is enabled, but all supported siganture schemes are aviable for selection.</p>
+                        <a href="https://datatracker.ietf.org/doc/html/rfc6961#autoid-6" target="_blank">OCSP-Stapling</a>
+                        <a href="https://datatracker.ietf.org/doc/html/rfc6960" target="_blank">OCSP</a>
+                        </div>
+                    </span>                 
+                </div>
+
+                <div id="ocsp-sig" class="hidden">
+                    <div class="form-group">
+                        <label for="sigSchemeOcsp">Signature Scheme</label>
+                        <div class="custom-dropdown">
+                            <input type="text" id="sigSchemeOcsp" placeholder="Select Scheme..." autocomplete="off">
+                            <div id="listSigSchemesOcsp" class="dropdown-options"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sigParamsOcsp">Parameterset</label>
+                        <div class="custom-dropdown">
+                            <input type="text" id="sigParamsOcsp" placeholder="Select scheme first.." disabled autocomplete="off">
+                            <div id="listSigParamsOcsp" class="dropdown-options"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--##### Certificate Transparency #####-->
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkCT">
+                    <label for="checkCT">Certificate Transparency </label>
+                    <span class="tooltip-container">
+                        <span class="help-icon">?</span>
+                        <div class="tooltip-box">
+                            Checking this box enables Certificate Transparency, adding the selected amount of STCs of the selected certificate to the server message.
+                        <a href="https://certificate.transparency.dev/" target="_blank">More</a>
+                        </div>
+                    </span>
+                    <input type="number" id="inputSctCount" value="2" min="1" class="tiny-input hidden">
+                </div>
+
+                <div id="ct-sig" class="hidden">
+                    <div class="form-group">
+                        <label for="sigSchemeCt">Signature Scheme</label>
+                        <div class="custom-dropdown">
+                            <input type="text" id="sigSchemeCt" placeholder="Select Scheme..." autocomplete="off">
+                            <div id="listSigSchemesCt" class="dropdown-options"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sigParamsCt">Parameterset</label>
+                        <div class="custom-dropdown">
+                            <input type="text" id="sigParamsCt" placeholder="Select scheme first.." disabled autocomplete="off">
+                            <div id="listSigParamsCt" class="dropdown-options"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--##### Encrypted Client Hello #####-->
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkECH">
+                    <label for="checkECH">Encrypted Client Hello </label>
+                    <span class="tooltip-container">
+                        <span class="help-icon">?</span>
+                        <div class="tooltip-box">
+                            Checking this box enables Encrypted Client Hello, effectivly doubling size of the Client Hellos public key.
+                        <a href="https://blog.cloudflare.com/announcing-encrypted-client-hello/" target="_blank">More</a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <button id="addBtn" class="btn-primary">Add to Comparison</button>
+        </div>
+
+        <div class="results-panel">
+            <div id="result-box" class="result-container hidden">
+                <h3>Configurations</h3>
+                <div id="result-content" class="columns-wrapper">
+                    <div id="col-left" class="config-column"></div>
+                    <div id="col-right" class="config-column"></div>
+                </div>
+            </div>
+            
+            <div id="empty-state" class="empty-state">
+                <p>Created instantiations will be displayed here</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="files/pki_schemes.js"></script>
+<script src="files/pki_params.js"></script>
+<script src="files/schemes.js"></script>
+<script src="files/parametersets.js"></script>
+
+<script src="scripts/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PQ TLS Calculator – Instructions</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .guide-container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .guide-container h1 {
+      color: #ffffff;
+      font-size: 1.6rem;
+      margin-bottom: .4rem;
+    }
+
+    .guide-container .subtitle {
+      color: #888;
+      font-size: .9rem;
+      margin-bottom: 2rem;
+    }
+
+    .guide-section {
+      margin-bottom: 2rem;
+    }
+
+    .guide-section h2 {
+      font-size: 1.05rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .guide-section p {
+      color: #c0c0c0;
+      line-height: 1.75;
+      margin-bottom: .75rem;
+      font-size: .95rem;
+    }
+
+    .guide-section ol,
+    .guide-section ul {
+      padding-left: 1.5rem;
+      color: #c0c0c0;
+      line-height: 1.75;
+      font-size: .95rem;
+    }
+
+    .guide-section li {
+      margin-bottom: .5rem;
+    }
+
+    .guide-section a {
+      color: #4da3ff;
+      text-decoration: none;
+    }
+
+    .guide-section a:hover {
+      text-decoration: underline;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #2d2d2d;
+      border: 1px solid #444;
+      border-radius: 4px;
+      padding: .15rem .45rem;
+      font-size: .8rem;
+      color: #aaa;
+      font-family: monospace;
+    }
+
+    .notice {
+      background: #1e2a1e;
+      border: 1px solid #3a5a3a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: #9ecf9e;
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
+    .notice strong {
+      color: #b6e3b6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="guide-container">
+
+    <h1>PQ-TLS Calculator – Instructions</h1>
+    <p class="subtitle">How to use the Post-Quantum TLS Handshake Size Configurator</p>
+
+    <!-- Overview -->
+    <div class="guide-section">
+      <h2>Overview</h2>
+      <p>
+        This calculator lets you compare the size of cryptographic objects exchanged within a TLS&nbsp;1.3
+        handshake. It covers key exchange, signatures,
+        <a href="https://de.wikipedia.org/wiki/Online_Certificate_Status_Protocol_stapling" target="_blank">OCSP&nbsp;stapling</a>,
+        Encrypted Client Hello, and Certificate Transparency.
+      </p>
+      <p>
+        The key exchange can be configured with classical, post-quantum, or hybrid schemes.
+        Available signature schemes are sourced from the PQ-Zoo project.
+      </p>
+    </div>
+
+    <!-- Creating a configuration -->
+    <div class="guide-section">
+      <h2>Creating a Configuration</h2>
+      <ol>
+        <li>
+          <strong>Key Exchange</strong> – Select a scheme from the upper dropdown.
+          Once chosen, pick the desired parameters from the second dropdown.
+          Enable <span class="badge">Use hybrid</span> to configure two separate
+          scheme/parameter pairs (KEM + PKI).
+        </li>
+        <li>
+          <strong>Signature Scheme</strong> – Choose the signature algorithm and its
+          parameter set from the corresponding dropdowns.
+        </li>
+        <li>
+          <strong>Extensions</strong> – Toggle optional extensions on or off:
+          <ul>
+            <li><em>OCSP Stapling</em> – Adds an OCSP response to the server message. Signature scheme is selectable.</li>
+            <li><em>Certificate Transparency</em> – Adds the configured number of SCTs to the server message.</li>
+            <li><em>Encrypted Client Hello</em> – Effectively doubles the size of the Client Hello's public key.</li>
+          </ul>
+        </li>
+        <li>
+          Click <span class="badge">Add to Comparison</span> to add the configuration
+          to the results list.
+        </li>
+      </ol>
+    </div>
+
+    <!-- Viewing configurations -->
+    <div class="guide-section">
+      <h2>Viewing Configurations</h2>
+      <p>
+        Each created configuration appears in the panel on the right, identified by its
+        key-exchange and signature scheme. The total size of transmitted crypto objects
+        is shown at a glance.
+      </p>
+      <p>Click on a configuration to expand it and reveal detailed breakdown:</p>
+      <ol>
+        <li>Key-exchange scheme name (links to external info), selected parameters, and NIST security level.</li>
+        <li>Signature scheme name (links to external info), selected parameters, and NIST security level.</li>
+        <li><strong>Client Hello</strong> – Size and type of each transmitted crypto object, plus total size.</li>
+        <li><strong>Server Hello</strong> – Size and type of each transmitted crypto object, plus total size.</li>
+        <li><strong>Combined handshake size</strong> – Sum of all transmitted crypto objects.</li>
+      </ol>
+    </div>
+
+    <!-- Known limitations -->
+    <div class="guide-section">
+      <h2>Known Limitations &amp; Upcoming Features</h2>
+      <div class="notice">
+        <strong>Not yet implemented:</strong>
+        <ul style="margin-top:.5rem; padding-left:1.25rem;">
+          <li>Selecting which certificate is used with Certificate Transparency.</li>
+          <li>Deleting individual configurations — reload the page to clear all.</li>
+          <li>Importing and exporting created configurations.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

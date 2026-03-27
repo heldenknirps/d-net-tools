@@ -1,0 +1,1 @@
+To use this calculator simply open index.html with the surrounding folder structure as it is.
